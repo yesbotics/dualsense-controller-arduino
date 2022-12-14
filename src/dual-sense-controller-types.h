@@ -53,6 +53,7 @@ enum class DualSenseControllerLedColor {
     /** r = 0, g = 0, b = 0 */
     BLACK = 0x00,
     OFF = 0x00,
+    GREY = 0x808080,
 };
 
 
