@@ -1,6 +1,6 @@
 .ONESHELL:
 
-all: reinit
+all: reinit link-example
 
 reinit: FORCE
 	rm -rf .pio
@@ -11,6 +11,11 @@ reinit: FORCE
 
 erase-flash: FORCE
 	platformio run --target erase
+
+link-example: FORCE
+	rm -f src/main.cpp
+	ln examples/DualSenseControllerDemo/DualSenseControllerDemo.ino src/main.cpp
+
 
 #
 # Programs
