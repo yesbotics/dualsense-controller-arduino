@@ -1,3 +1,7 @@
+#if !defined(ARDUINO_ARCH_ESP32) && !defined(ARDUINO_ARCH_ESP8266)
+#error Unsupported board/architecture
+#endif
+
 #include <dual-sense-controller-types.h>
 
 #if defined(PLATFORMIO)
