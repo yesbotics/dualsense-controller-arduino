@@ -18,9 +18,9 @@ void printValue(String s, int16_t value);
 /****************************** CONFIG START ****************************************/
 
 /* For Bluetooth connected Controller uncomment following line */
-#define DUALSENSE_CONTROLLER_VARIANT DUALSENSE_CONTROLLER_VARIANT_BLUETOOTH
+//#define DUALSENSE_CONTROLLER_VARIANT DUALSENSE_CONTROLLER_VARIANT_BLUETOOTH
 /* OR for USB connected Controller comment previous line and uncomment following line */
-//#define DUALSENSE_CONTROLLER_VARIANT DUALSENSE_CONTROLLER_VARIANT_USB
+#define DUALSENSE_CONTROLLER_VARIANT DUALSENSE_CONTROLLER_VARIANT_USB
 
 /* start sketch in pairing mode set to true (only relevant for Bluetooth variant) */
 const bool PAIR_CONTROLLER_WHILE_SETUP = false;
@@ -69,7 +69,10 @@ void setup() {
         Serial.println(F("Error: initialization failed"));
         while (true);
     }
+
+#if DUALSENSE_CONTROLLER_VARIANT == DUALSENSE_CONTROLLER_VARIANT_BLUETOOTH
     if (PAIR_CONTROLLER_WHILE_SETUP) controller.pair();
+#endif
 }
 
 void loop() {
@@ -97,7 +100,9 @@ void onValueEvent(DualSenseControllerValueId id, int16_t value) {
 
         case DualSenseControllerValueId::PLAYSTATION:
             if (DEBUG_PRINT) printValue(F("PLAYSTATION"), value);
+#if DUALSENSE_CONTROLLER_VARIANT == DUALSENSE_CONTROLLER_VARIANT_BLUETOOTH
             if (value) controller.disconnect();
+#endif
             break;
         case DualSenseControllerValueId::MICROPHONE:
             if (DEBUG_PRINT) printValue(F("MICROPHONE"), value);
