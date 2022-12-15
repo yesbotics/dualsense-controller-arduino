@@ -8,7 +8,7 @@ void onStateEvent(DualSenseControllerStateEvent event);
 
 void onValueEvent(DualSenseControllerValueId id, int16_t value);
 
-void printValue(String s, int16_t value);
+void printValueIfDebugPrint(String s, int16_t value);
 
 #endif
 
@@ -99,44 +99,44 @@ void onValueEvent(DualSenseControllerValueId id, int16_t value) {
     switch (id) {
 
         case DualSenseControllerValueId::PLAYSTATION:
-            if (DEBUG_PRINT) printValue(F("PLAYSTATION"), value);
+            printValueIfDebugPrint(F("PLAYSTATION"), value);
 #if DUALSENSE_CONTROLLER_VARIANT == DUALSENSE_CONTROLLER_VARIANT_BLUETOOTH
             if (value) controller.disconnect();
 #endif
             break;
         case DualSenseControllerValueId::MICROPHONE:
-            if (DEBUG_PRINT) printValue(F("MICROPHONE"), value);
+            printValueIfDebugPrint(F("MICROPHONE"), value);
             if (value) controller.toggleMicLed();
             break;
         case DualSenseControllerValueId::TOUCHPAD:
-            if (DEBUG_PRINT) printValue(F("TOUCHPAD"), value);
+            printValueIfDebugPrint(F("TOUCHPAD"), value);
             controller.setLed(value ? DualSenseControllerLedColor::LIGHTBLUE : DualSenseControllerLedColor::BLUE);
             break;
         case DualSenseControllerValueId::CREATE:
-            if (DEBUG_PRINT) printValue(F("CREATE"), value);
+            printValueIfDebugPrint(F("CREATE"), value);
             if (value) controller.setLed(DualSenseControllerLedColor::YELLOW);
             break;
         case DualSenseControllerValueId::OPTIONS:
-            if (DEBUG_PRINT) printValue(F("OPTIONS"), value);
+            printValueIfDebugPrint(F("OPTIONS"), value);
             if (value) controller.setLed(DualSenseControllerLedColor::PURPLE);
             break;
 
         case DualSenseControllerValueId::UP:
-            if (DEBUG_PRINT) printValue(F("UP"), value);
+            printValueIfDebugPrint(F("UP"), value);
             if (value) {
                 controller.setLeftTriggerForce(0, 255);
                 controller.setLed(DualSenseControllerLedColor::WHITE);
             } else controller.setLed(DualSenseControllerLedColor::GREY);
             break;
         case DualSenseControllerValueId::RIGHT:
-            if (DEBUG_PRINT) printValue(F("RIGHT"), value);
+            printValueIfDebugPrint(F("RIGHT"), value);
             if (value) {
                 controller.setLeftTriggerSection(80, 160);
                 controller.setLed(DualSenseControllerLedColor::WHITE);
             } else controller.setLed(DualSenseControllerLedColor::GREY);
             break;
         case DualSenseControllerValueId::LEFT:
-            if (DEBUG_PRINT) printValue(F("LEFT"), value);
+            printValueIfDebugPrint(F("LEFT"), value);
             if (value) {
                 controller.setLeftTriggerForceEffect(
                         0, true, 0, 80, 255, 50
@@ -145,7 +145,7 @@ void onValueEvent(DualSenseControllerValueId id, int16_t value) {
             } else controller.setLed(DualSenseControllerLedColor::GREY);
             break;
         case DualSenseControllerValueId::DOWN:
-            if (DEBUG_PRINT) printValue(F("DOWN"), value);
+            printValueIfDebugPrint(F("DOWN"), value);
             if (value) {
                 controller.clearLeftTriggerForce();
                 controller.setLed(DualSenseControllerLedColor::WHITE);
@@ -153,21 +153,21 @@ void onValueEvent(DualSenseControllerValueId id, int16_t value) {
             break;
 
         case DualSenseControllerValueId::TRIANGLE:
-            if (DEBUG_PRINT) printValue(F("TRIANGLE"), value);
+            printValueIfDebugPrint(F("TRIANGLE"), value);
             if (value) {
                 controller.setRightTriggerForce(0, 255);
                 controller.setLed(DualSenseControllerLedColor::WHITE);
             } else controller.setLed(DualSenseControllerLedColor::GREY);
             break;
         case DualSenseControllerValueId::CIRCLE:
-            if (DEBUG_PRINT) printValue(F("CIRCLE"), value);
+            printValueIfDebugPrint(F("CIRCLE"), value);
             if (value) {
                 controller.setRightTriggerSection(80, 160);
                 controller.setLed(DualSenseControllerLedColor::WHITE);
             } else controller.setLed(DualSenseControllerLedColor::GREY);
             break;
         case DualSenseControllerValueId::SQUARE:
-            if (DEBUG_PRINT) printValue(F("SQUARE"), value);
+            printValueIfDebugPrint(F("SQUARE"), value);
             if (value) {
                 controller.setRightTriggerForceEffect(
                         0, true, 0, 80, 255, 20
@@ -176,7 +176,7 @@ void onValueEvent(DualSenseControllerValueId id, int16_t value) {
             } else controller.setLed(DualSenseControllerLedColor::GREY);
             break;
         case DualSenseControllerValueId::CROSS:
-            if (DEBUG_PRINT) printValue(F("CROSS"), value);
+            printValueIfDebugPrint(F("CROSS"), value);
             if (value) {
                 controller.clearRightTriggerForce();
                 controller.setLed(DualSenseControllerLedColor::WHITE);
@@ -184,16 +184,16 @@ void onValueEvent(DualSenseControllerValueId id, int16_t value) {
             break;
 
         case DualSenseControllerValueId::L3:
-            if (DEBUG_PRINT) printValue(F("L3"), value);
+            printValueIfDebugPrint(F("L3"), value);
             controller.setBigRumble(value ? 128 : 0);
             break;
         case DualSenseControllerValueId::R3:
-            if (DEBUG_PRINT) printValue(F("R3"), value);
+            printValueIfDebugPrint(F("R3"), value);
             controller.setSmallRumble(value ? 128 : 0);
             break;
 
         case DualSenseControllerValueId::L1:
-            if (DEBUG_PRINT) printValue(F("L1"), value);
+            printValueIfDebugPrint(F("L1"), value);
             if (value) {
                 if (playerLedMask <= 1)playerLedMask = 0;
                 else playerLedMask = (playerLedMask >> 1) | 1;
@@ -201,7 +201,7 @@ void onValueEvent(DualSenseControllerValueId id, int16_t value) {
             }
             break;
         case DualSenseControllerValueId::R1:
-            if (DEBUG_PRINT) printValue(F("R1"), value);
+            printValueIfDebugPrint(F("R1"), value);
             if (value) {
                 playerLedMask = (playerLedMask << 1) | 1;
                 if (playerLedMask > 0x1F)playerLedMask = 0x1F;
@@ -210,83 +210,84 @@ void onValueEvent(DualSenseControllerValueId id, int16_t value) {
             break;
 
         case DualSenseControllerValueId::L2:
-            if (DEBUG_PRINT) printValue(F("L2"), value);
+            printValueIfDebugPrint(F("L2"), value);
             break;
         case DualSenseControllerValueId::R2:
-            if (DEBUG_PRINT) printValue(F("R2"), value);
+            printValueIfDebugPrint(F("R2"), value);
             break;
 
         case DualSenseControllerValueId::ANALOG_L2:
-            if (DEBUG_PRINT) printValue(F("ANALOG_L2"), value);
+            printValueIfDebugPrint(F("ANALOG_L2"), value);
             break;
         case DualSenseControllerValueId::ANALOG_R2:
-            if (DEBUG_PRINT) printValue(F("ANALOG_R2"), value);
+            printValueIfDebugPrint(F("ANALOG_R2"), value);
             break;
 
         case DualSenseControllerValueId::LEFT_HAT_X:
-            if (DEBUG_PRINT) printValue(F("LEFT_HAT_X"), value);
+            printValueIfDebugPrint(F("LEFT_HAT_X"), value);
             break;
         case DualSenseControllerValueId::LEFT_HAT_Y:
-            if (DEBUG_PRINT) printValue(F("LEFT_HAT_Y"), value);
+            printValueIfDebugPrint(F("LEFT_HAT_Y"), value);
             break;
         case DualSenseControllerValueId::RIGHT_HAT_X:
-            if (DEBUG_PRINT) printValue(F("RIGHT_HAT_X"), value);
+            printValueIfDebugPrint(F("RIGHT_HAT_X"), value);
             break;
         case DualSenseControllerValueId::RIGHT_HAT_Y:
-            if (DEBUG_PRINT) printValue(F("RIGHT_HAT_Y"), value);
+            printValueIfDebugPrint(F("RIGHT_HAT_Y"), value);
             break;
 
         case DualSenseControllerValueId::ACCELEROMETER_X:
-            if (DEBUG_PRINT) printValue(F("ACCELEROMETER_X"), value);
+            printValueIfDebugPrint(F("ACCELEROMETER_X"), value);
             break;
         case DualSenseControllerValueId::ACCELEROMETER_Y:
-            if (DEBUG_PRINT) printValue(F("ACCELEROMETER_Y"), value);
+            printValueIfDebugPrint(F("ACCELEROMETER_Y"), value);
             break;
         case DualSenseControllerValueId::ACCELEROMETER_Z:
-            if (DEBUG_PRINT) printValue(F("ACCELEROMETER_Z"), value);
+            printValueIfDebugPrint(F("ACCELEROMETER_Z"), value);
             break;
 
         case DualSenseControllerValueId::GYROSCOPE_X:
-            if (DEBUG_PRINT) printValue(F("GYROSCOPE_X"), value);
+            printValueIfDebugPrint(F("GYROSCOPE_X"), value);
             break;
         case DualSenseControllerValueId::GYROSCOPE_Y:
-            if (DEBUG_PRINT) printValue(F("GYROSCOPE_Y"), value);
+            printValueIfDebugPrint(F("GYROSCOPE_Y"), value);
             Serial.print("GYROSCOPE_Y");
             break;
         case DualSenseControllerValueId::GYROSCOPE_Z:
-            if (DEBUG_PRINT) printValue(F("GYROSCOPE_Z"), value);
+            printValueIfDebugPrint(F("GYROSCOPE_Z"), value);
             break;
 
         case DualSenseControllerValueId::ORIENTATION_PITCH:
-            if (DEBUG_PRINT) printValue(F("ORIENTATION_PITCH"), value);
+            printValueIfDebugPrint(F("ORIENTATION_PITCH"), value);
             break;
         case DualSenseControllerValueId::ORIENTATION_ROLL:
-            if (DEBUG_PRINT) printValue(F("ORIENTATION_ROLL"), value);
+            printValueIfDebugPrint(F("ORIENTATION_ROLL"), value);
             break;
 
         case DualSenseControllerValueId::FINGER_1_IS_TOUCHING:
-            if (DEBUG_PRINT) printValue(F("FINGER_1_IS_TOUCHING"), value);
+            printValueIfDebugPrint(F("FINGER_1_IS_TOUCHING"), value);
             break;
         case DualSenseControllerValueId::FINGER_1_X:
-            if (DEBUG_PRINT) printValue(F("FINGER_1_X"), value);
+            printValueIfDebugPrint(F("FINGER_1_X"), value);
             break;
         case DualSenseControllerValueId::FINGER_1_Y:
-            if (DEBUG_PRINT) printValue(F("FINGER_1_Y"), value);
+            printValueIfDebugPrint(F("FINGER_1_Y"), value);
             break;
         case DualSenseControllerValueId::FINGER_2_IS_TOUCHING:
-            if (DEBUG_PRINT) printValue(F("FINGER_2_IS_TOUCHING"), value);
+            printValueIfDebugPrint(F("FINGER_2_IS_TOUCHING"), value);
             break;
         case DualSenseControllerValueId::FINGER_2_X:
-            if (DEBUG_PRINT) printValue(F("FINGER_2_X"), value);
+            printValueIfDebugPrint(F("FINGER_2_X"), value);
             break;
         case DualSenseControllerValueId::FINGER_2_Y:
-            if (DEBUG_PRINT) printValue(F("FINGER_2_Y"), value);
+            printValueIfDebugPrint(F("FINGER_2_Y"), value);
             break;
     }
 
 }
 
-void printValue(String s, int16_t value) {
+void printValueIfDebugPrint(String s, int16_t value) {
+    if (!DEBUG_PRINT) return;
     Serial.print(s);
     Serial.print(": ");
     Serial.println(value);
