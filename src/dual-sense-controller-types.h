@@ -35,7 +35,7 @@ struct DualSenseControllerOtherValues {
     uint8_t smallRumble;
 };
 
-enum class DualSenseControllerLedColor {
+enum class DualSenseControllerLedColor : uint32_t {
     /** r = 255, g = 0, b = 0 */
     RED = 0xFF0000,
     /** r = 0, g = 255, b = 0 */
@@ -55,7 +55,6 @@ enum class DualSenseControllerLedColor {
     OFF = 0x00,
     GREY = 0x808080,
 };
-
 
 using DualSenseControllerStateEventCallback = void (*)(DualSenseControllerStateEvent event);
 
