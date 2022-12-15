@@ -4,4 +4,5 @@
 cmake-build-*
 CMakeLists.txt
 CMakeListsPrivate.txt
-
+# symlink to ./examples/DualSenseControllerDemo/DualSenseControllerDemo.ino for platformio
+src/main.cpp
