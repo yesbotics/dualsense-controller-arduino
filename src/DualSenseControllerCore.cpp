@@ -69,7 +69,7 @@ void DualSenseControllerCore::poll() {
     if ((currentMillis - this->lastMillis_) >= this->optionsPtr_->pollingInterval) {
         this->lastMillis_ = currentMillis;
         if (this->optionsPtr_->checkAnalogButtons) this->checkAnalogButtons();
-        if (this->optionsPtr_->checkAnalogButtons) this->checkAnalogHats();
+        if (this->optionsPtr_->checkAnalogHats) this->checkAnalogHats();
         if (this->optionsPtr_->checkImu) this->checkImu();
         if (this->optionsPtr_->checkTouchpad) this->checkTouchpadFingerPos();
         if (this->optionsPtr_->checkOrientation) this->checkOrientation();
