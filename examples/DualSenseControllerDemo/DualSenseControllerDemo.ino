@@ -73,9 +73,11 @@ void setup() {
         Serial.println(F("Error: initialization failed"));
         while (true);
     }
-
 #if DUALSENSE_CONTROLLER_VARIANT == DUALSENSE_CONTROLLER_VARIANT_BLUETOOTH
-    if (PAIR_CONTROLLER_WHILE_SETUP) controller.pair();
+    if (PAIR_CONTROLLER_WHILE_SETUP) {
+        Serial.println(F("pair()"));
+        controller.pair();
+    }
 #endif
 }
 
