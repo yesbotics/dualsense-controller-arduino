@@ -21,8 +21,6 @@ private:
 
     void reset();
 
-    void triggerStateEvent(DualSenseControllerStateEvent event);
-
     void triggerValueEvent(DualSenseControllerValueId id, int16_t newValue);
 
     void checkDigitalButtons();
@@ -62,6 +60,8 @@ protected:
     // da die Klasse nicht instanzierbar ist und 'delete (DualSenseControllerCore*) dscc' ist nicht möglich
     // siehe C++ Aufbaukurs Seite 200
     ~DualSenseControllerCore() = default;
+
+    void triggerStateEvent(DualSenseControllerStateEvent event);
 
     virtual void onConnectionChange(bool isConnected);
 
