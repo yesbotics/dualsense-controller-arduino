@@ -6,7 +6,8 @@
 enum class DualSenseControllerStateEvent : byte {
     INITIALIZED = 0,
     CONNECTED = 1,
-    DISCONNECTED = 2
+    DISCONNECTED = 2,
+    PAIRING = 3
 };
 
 enum class DualSenseControllerValueId : byte {
@@ -88,18 +89,18 @@ enum class DualSenseControllerLedColor : uint32_t {
 
 using DualSenseControllerStateEventCallback = void (*)(DualSenseControllerStateEvent event);
 
-using DualSenseControllerValueEventCallback = void (*)(DualSenseControllerValueId id, int16_t value);
+using DualSenseControllerValueChangeEventCallback = void (*)(DualSenseControllerValueId id, int16_t value);
 
 struct DualSenseControllerOptions {
     DualSenseControllerStateEventCallback stateEventCallback;
-    DualSenseControllerValueEventCallback valueEventCallback;
+    DualSenseControllerValueChangeEventCallback valueChangeEventCallback;
     uint16_t pollingInterval; // interval for value change check
-    bool checkDigitalButtons;
-    bool checkAnalogButtons;
-    bool checkAnalogHats;
-    bool checkImu;
-    bool checkTouchpad;
-    bool checkOrientation;
+    bool pollDigitalButtons;
+    bool pollAnalogButtons;
+    bool pollAnalogHats;
+    bool pollImu;
+    bool pollTouchpad;
+    bool pollOrientation;
     uint8_t analogHatThreshold;
 };
 

@@ -11,14 +11,14 @@ DualSenseControllerCore::DualSenseControllerCore(
         ps5Parser_{ps5Parser},
         optionsPtr_{optionsPtr} {
     if (!this->optionsPtr_->stateEventCallback)this->optionsPtr_->stateEventCallback = nullptr;
-    if (!this->optionsPtr_->valueEventCallback)this->optionsPtr_->valueEventCallback = nullptr;
+    if (!this->optionsPtr_->valueChangeEventCallback)this->optionsPtr_->valueChangeEventCallback = nullptr;
     if (!this->optionsPtr_->pollingInterval)this->optionsPtr_->pollingInterval = DEFAULT_POLLING_INTERVAL;
-    if (!this->optionsPtr_->checkDigitalButtons)this->optionsPtr_->checkDigitalButtons = DEFAULT_CHECK_DIGITAL_BUTTONS;
-    if (!this->optionsPtr_->checkAnalogButtons)this->optionsPtr_->checkAnalogButtons = DEFAULT_CHECK_ANALOG_BUTTONS;
-    if (!this->optionsPtr_->checkAnalogHats)this->optionsPtr_->checkAnalogHats = DEFAULT_CHECK_ANALOG_HATS;
-    if (!this->optionsPtr_->checkImu)this->optionsPtr_->checkImu = DEFAULT_CHECK_IMU;
-    if (!this->optionsPtr_->checkTouchpad)this->optionsPtr_->checkTouchpad = DEFAULT_CHECK_TOUCHING;
-    if (!this->optionsPtr_->checkOrientation)this->optionsPtr_->checkOrientation = DEFAULT_CHECK_ORIENTATION;
+    if (!this->optionsPtr_->pollDigitalButtons)this->optionsPtr_->pollDigitalButtons = DEFAULT_CHECK_DIGITAL_BUTTONS;
+    if (!this->optionsPtr_->pollAnalogButtons)this->optionsPtr_->pollAnalogButtons = DEFAULT_CHECK_ANALOG_BUTTONS;
+    if (!this->optionsPtr_->pollAnalogHats)this->optionsPtr_->pollAnalogHats = DEFAULT_CHECK_ANALOG_HATS;
+    if (!this->optionsPtr_->pollImu)this->optionsPtr_->pollImu = DEFAULT_CHECK_IMU;
+    if (!this->optionsPtr_->pollTouchpad)this->optionsPtr_->pollTouchpad = DEFAULT_CHECK_TOUCHING;
+    if (!this->optionsPtr_->pollOrientation)this->optionsPtr_->pollOrientation = DEFAULT_CHECK_ORIENTATION;
     if (!this->optionsPtr_->analogHatThreshold)this->optionsPtr_->analogHatThreshold = DEFAULT_ANALOG_HAT_THRESHOLD;
 }
 
@@ -61,18 +61,18 @@ void DualSenseControllerCore::poll() {
 
     if (this->lastMessageCounter_ == this->ps5Parser_->getMessageCounter())return;
 
-    if (!this->optionsPtr_->valueEventCallback)return;
+    if (!this->optionsPtr_->valueChangeEventCallback)return;
 
-    if (this->optionsPtr_->checkTouchpad) this->checkTouchpadIsTouched();
-    if (this->optionsPtr_->checkDigitalButtons) this->checkDigitalButtons();
+    if (this->optionsPtr_->pollTouchpad) this->checkTouchpadIsTouched();
+    if (this->optionsPtr_->pollDigitalButtons) this->checkDigitalButtons();
     unsigned long currentMillis = millis();
     if ((currentMillis - this->lastMillis_) >= this->optionsPtr_->pollingInterval) {
         this->lastMillis_ = currentMillis;
-        if (this->optionsPtr_->checkAnalogButtons) this->checkAnalogButtons();
-        if (this->optionsPtr_->checkAnalogHats) this->checkAnalogHats();
-        if (this->optionsPtr_->checkImu) this->checkImu();
-        if (this->optionsPtr_->checkTouchpad) this->checkTouchpadFingerPos();
-        if (this->optionsPtr_->checkOrientation) this->checkOrientation();
+        if (this->optionsPtr_->pollAnalogButtons) this->checkAnalogButtons();
+        if (this->optionsPtr_->pollAnalogHats) this->checkAnalogHats();
+        if (this->optionsPtr_->pollImu) this->checkImu();
+        if (this->optionsPtr_->pollTouchpad) this->checkTouchpadFingerPos();
+        if (this->optionsPtr_->pollOrientation) this->checkOrientation();
     }
 }
 
@@ -198,8 +198,8 @@ void DualSenseControllerCore::triggerStateEvent(DualSenseControllerStateEvent ev
 }
 
 void DualSenseControllerCore::triggerValueEvent(DualSenseControllerValueId id, int16_t newValue) {
-    if (this->optionsPtr_->valueEventCallback) {
-        this->optionsPtr_->valueEventCallback(id, newValue);
+    if (this->optionsPtr_->valueChangeEventCallback) {
+        this->optionsPtr_->valueChangeEventCallback(id, newValue);
     }
 }
 

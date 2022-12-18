@@ -27,6 +27,7 @@ void DualSenseControllerBt::pair() {
     if (this->isPairing_)return;
     this->isPairing_ = true;
     this->ps5BtPtr_->pair();
+    this->triggerStateEvent(DualSenseControllerStateEvent::PAIRING);
 }
 
 void DualSenseControllerBt::disconnect() {
