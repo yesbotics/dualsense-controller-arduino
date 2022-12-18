@@ -3,8 +3,10 @@
 
 #include <Arduino.h>
 
-enum class DualSenseControllerStateEvent {
-    INITIALIZED, CONNECTED, DISCONNECTED
+enum class DualSenseControllerStateEvent : byte {
+    INITIALIZED = 0,
+    CONNECTED = 1,
+    DISCONNECTED = 2
 };
 
 enum class DualSenseControllerValueId : byte {
