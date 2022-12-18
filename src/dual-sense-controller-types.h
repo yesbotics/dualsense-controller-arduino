@@ -7,18 +7,46 @@ enum class DualSenseControllerStateEvent {
     INITIALIZED, CONNECTED, DISCONNECTED
 };
 
-enum class DualSenseControllerValueId {
-    LEFT_HAT_X, LEFT_HAT_Y, RIGHT_HAT_X, RIGHT_HAT_Y,
-    ANALOG_L2, ANALOG_R2,
-    L1, R1, L2, R2, L3, R3,
-    RIGHT, DOWN, LEFT, UP,
-    TRIANGLE, CIRCLE, CROSS, SQUARE,
-    CREATE, OPTIONS, PLAYSTATION, TOUCHPAD, MICROPHONE,
-    ACCELEROMETER_X, ACCELEROMETER_Y, ACCELEROMETER_Z,
-    GYROSCOPE_X, GYROSCOPE_Y, GYROSCOPE_Z,
-    ORIENTATION_PITCH, ORIENTATION_ROLL,
-    FINGER_1_IS_TOUCHING, FINGER_1_X, FINGER_1_Y,
-    FINGER_2_IS_TOUCHING, FINGER_2_X, FINGER_2_Y
+enum class DualSenseControllerValueId : byte {
+    PLAYSTATION = 0,
+    CREATE = 1,
+    OPTIONS = 2,
+    TOUCHPAD = 3,
+    MICROPHONE = 4,
+    LEFT_HAT_X = 5,
+    LEFT_HAT_Y = 6,
+    RIGHT_HAT_X = 7,
+    RIGHT_HAT_Y = 8,
+    ANALOG_L2 = 9,
+    ANALOG_R2 = 10,
+    L1 = 11,
+    R1 = 12,
+    L2 = 13,
+    R2 = 14,
+    L3 = 15,
+    R3 = 16,
+    RIGHT = 17,
+    DOWN = 18,
+    LEFT = 19,
+    UP = 20,
+    TRIANGLE = 21,
+    CIRCLE = 22,
+    CROSS = 23,
+    SQUARE = 24,
+    ACCELEROMETER_X = 25,
+    ACCELEROMETER_Y = 26,
+    ACCELEROMETER_Z = 27,
+    GYROSCOPE_X = 28,
+    GYROSCOPE_Y = 29,
+    GYROSCOPE_Z = 30,
+    ORIENTATION_PITCH = 31,
+    ORIENTATION_ROLL = 32,
+    FINGER_1_IS_TOUCHING = 33,
+    FINGER_1_X = 34,
+    FINGER_1_Y = 35,
+    FINGER_2_IS_TOUCHING = 36,
+    FINGER_2_X = 37,
+    FINGER_2_Y = 38
 };
 
 template<typename T>
