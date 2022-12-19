@@ -4,13 +4,14 @@ static USB usb;
 static BTD btd(&usb);
 static PS5BT ps5bt(&btd);
 
-DualSenseControllerBt::DualSenseControllerBt(DualSenseControllerOptions* optionsPtr) :
+
+DualSenseControllerBt::DualSenseControllerBt(DualSenseControllerOptions options) :
         btdPtr_{&btd},
         ps5BtPtr_{&ps5bt},
         DualSenseControllerCore(
                 &usb,
                 &ps5bt,
-                optionsPtr
+                &options
         ) {
 }
 

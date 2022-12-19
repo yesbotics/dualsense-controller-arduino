@@ -11,7 +11,7 @@ private:
     PS5USB* ps5UsbPtr_ = nullptr;
 
 public:
-    explicit DualSenseControllerUsb(DualSenseControllerOptions* optionsPtr);
+    explicit DualSenseControllerUsb(DualSenseControllerOptions options);
 
     ~DualSenseControllerUsb() = default;
 
