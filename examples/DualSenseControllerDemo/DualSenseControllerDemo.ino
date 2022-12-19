@@ -37,7 +37,7 @@ const bool DEBUG_PRINT = true;
 DualSenseControllerOptions controllerOptions{
         onStateEvent,
         onValueChangeEvent,
-        40,
+        10,
         true,
         true,
         true,
@@ -52,13 +52,13 @@ DualSenseControllerOptions controllerOptions{
 
 #include <DualSenseControllerBt.h>
 
-DualSenseControllerBt controller(&controllerOptions);
+DualSenseControllerBt controller(controllerOptions);
 
 #else
 
 #include <DualSenseControllerUsb.h>
 
-DualSenseControllerUsb controller(&options);
+DualSenseControllerUsb controller(controllerOptions);
 
 #endif
 
