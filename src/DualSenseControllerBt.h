@@ -20,6 +20,7 @@ protected:
 
 public:
 
+    explicit DualSenseControllerBt(const DualSenseControllerOptions& optionsRef);
     explicit DualSenseControllerBt(const DualSenseControllerOptions* optionsPtr);
 
     ~DualSenseControllerBt() = default;

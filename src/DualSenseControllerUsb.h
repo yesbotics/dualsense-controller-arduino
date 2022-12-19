@@ -11,6 +11,8 @@ private:
     PS5USB* ps5UsbPtr_ = nullptr;
 
 public:
+    explicit DualSenseControllerUsb(const DualSenseControllerOptions& optionsRef);
+
     explicit DualSenseControllerUsb(const DualSenseControllerOptions* optionsPtr);
 
     ~DualSenseControllerUsb() = default;
@@ -18,7 +20,7 @@ public:
     DualSenseControllerUsb(const DualSenseControllerUsb&) = delete; // forbid copy-ctor
     DualSenseControllerUsb& operator=(const DualSenseControllerUsb&) = delete; // forbid copy-assignment
 
-    bool isConnected() const override ;
+    bool isConnected() const override;
 
 };
 
