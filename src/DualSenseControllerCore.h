@@ -23,19 +23,19 @@ private:
 
     void triggerValueEvent(DualSenseControllerValueId id, int16_t newValue);
 
-    void checkDigitalButtons();
+    void pollDigitalButtons();
 
-    void checkAnalogButtons();
+    void pollAnalogButtons();
 
-    void checkAnalogHats();
+    void pollAnalogHats();
 
-    void checkImu();
+    void pollImu();
 
-    void checkTouchpadIsTouched();
+    void pollTouchpadIsTouched();
 
-    void checkTouchpadFingerPos();
+    void pollTouchpadFingerPos();
 
-    void checkOrientation();
+    void pollOrientation();
 
     template<typename TValue>
     void compare(TValue* valuePtr, TValue& newValue, DualSenseControllerValueId id, uint8_t threshold = 0) {

@@ -63,16 +63,16 @@ void DualSenseControllerCore::poll() {
 
     if (!this->optionsPtr_->valueChangeEventCallback)return;
 
-    if (this->optionsPtr_->pollTouchpad) this->checkTouchpadIsTouched();
-    if (this->optionsPtr_->pollDigitalButtons) this->checkDigitalButtons();
+    if (this->optionsPtr_->pollTouchpad) this->pollTouchpadIsTouched();
+    if (this->optionsPtr_->pollDigitalButtons) this->pollDigitalButtons();
     unsigned long currentMillis = millis();
     if ((currentMillis - this->lastMillis_) >= this->optionsPtr_->pollingInterval) {
         this->lastMillis_ = currentMillis;
-        if (this->optionsPtr_->pollAnalogButtons) this->checkAnalogButtons();
-        if (this->optionsPtr_->pollAnalogHats) this->checkAnalogHats();
-        if (this->optionsPtr_->pollImu) this->checkImu();
-        if (this->optionsPtr_->pollTouchpad) this->checkTouchpadFingerPos();
-        if (this->optionsPtr_->pollOrientation) this->checkOrientation();
+        if (this->optionsPtr_->pollAnalogButtons) this->pollAnalogButtons();
+        if (this->optionsPtr_->pollAnalogHats) this->pollAnalogHats();
+        if (this->optionsPtr_->pollImu) this->pollImu();
+        if (this->optionsPtr_->pollTouchpad) this->pollTouchpadFingerPos();
+        if (this->optionsPtr_->pollOrientation) this->pollOrientation();
     }
 }
 
@@ -87,7 +87,7 @@ void DualSenseControllerCore::onConnectionChange(bool isConnected) {
     }
 }
 
-void DualSenseControllerCore::checkDigitalButtons() {
+void DualSenseControllerCore::pollDigitalButtons() {
     for (int i = 0; i < DIGITAL_BUTTONS_SIZE; i++) {
         DualSenseControllerValueItem<bool>& dscvi = DIGITAL_BUTTONS[i];
         auto ps5id = static_cast<ButtonEnum>(dscvi.ps5LibId);
@@ -100,7 +100,7 @@ void DualSenseControllerCore::checkDigitalButtons() {
     }
 }
 
-void DualSenseControllerCore::checkAnalogButtons() {
+void DualSenseControllerCore::pollAnalogButtons() {
     for (int i = 0; i < ANALOG_BUTTONS_SIZE; i++) {
         DualSenseControllerValueItem<uint8_t>& dscvi = ANALOG_BUTTONS[i];
         auto ps5id = static_cast<ButtonEnum>(dscvi.ps5LibId);
@@ -113,7 +113,7 @@ void DualSenseControllerCore::checkAnalogButtons() {
     }
 }
 
-void DualSenseControllerCore::checkAnalogHats() {
+void DualSenseControllerCore::pollAnalogHats() {
     for (int i = 0; i < ANALOG_HATS_SIZE; i++) {
         DualSenseControllerValueItem<uint8_t>& dscvi = ANALOG_HATS[i];
         auto ps5id = static_cast<AnalogHatEnum>(dscvi.ps5LibId);
@@ -127,7 +127,7 @@ void DualSenseControllerCore::checkAnalogHats() {
     }
 }
 
-void DualSenseControllerCore::checkImu() {
+void DualSenseControllerCore::pollImu() {
     for (int i = 0; i < SENSOR_VALUES_SIZE; i++) {
         DualSenseControllerValueItem<int16_t>& dscvi = SENSOR_VALUES[i];
         auto ps5id = static_cast<SensorEnum>(dscvi.ps5LibId);
@@ -140,7 +140,7 @@ void DualSenseControllerCore::checkImu() {
     }
 };
 
-void DualSenseControllerCore::checkTouchpadIsTouched() {
+void DualSenseControllerCore::pollTouchpadIsTouched() {
     for (int i = 0; i < FINGER_IS_TOUCHING_VALUES_SIZE; i++) {
         DualSenseControllerValueItem<bool>& dscvi = FINGER_IS_TOUCHING_VALUES[i];
         auto ps5id = static_cast<uint8_t>(dscvi.ps5LibId);
@@ -153,7 +153,7 @@ void DualSenseControllerCore::checkTouchpadIsTouched() {
     }
 }
 
-void DualSenseControllerCore::checkTouchpadFingerPos() {
+void DualSenseControllerCore::pollTouchpadFingerPos() {
     for (int i = 0; i < FINGER_X_VALUES_SIZE; i++) {
         DualSenseControllerValueItem<uint16_t>& dscvi = FINGER_X_VALUES[i];
         auto ps5id = static_cast<uint8_t>(dscvi.ps5LibId);
@@ -178,7 +178,7 @@ void DualSenseControllerCore::checkTouchpadFingerPos() {
     }
 }
 
-void DualSenseControllerCore::checkOrientation() {
+void DualSenseControllerCore::pollOrientation() {
     for (int i = 0; i < ORIENTATION_VALUES_SIZE; i++) {
         DualSenseControllerValueItem<float>& dscvi = ORIENTATION_VALUES[i];
         auto ps5id = static_cast<AngleEnum>(dscvi.ps5LibId);
