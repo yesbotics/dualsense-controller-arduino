@@ -95,8 +95,8 @@ struct DualSenseControllerOptions {
     DualSenseControllerOptions(
             DualSenseControllerStateEventCallback stateEventCallback = nullptr,
             DualSenseControllerValueChangeEventCallback valueChangeEventCallback = nullptr,
-            uint16_t pollingInterval = 40,
-            bool pollDigitalButton = true,
+            uint16_t pollingInterval = 25,
+            bool pollDigitalButtons = true,
             bool pollAnalogButtons = true,
             bool pollAnalogHats = true,
             bool pollImu = false,
