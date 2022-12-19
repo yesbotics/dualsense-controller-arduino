@@ -34,24 +34,25 @@ const bool DEBUG_PRINT = true;
 
 /****************************** CONFIG END ******************************************/
 
-DualSenseControllerOptions options = {
-        .stateEventCallback = onStateEvent,
-        .valueChangeEventCallback = onValueChangeEvent,
-        .pollingInterval = 30,
-        .pollDigitalButtons = true,
-        .pollAnalogButtons = true,
-        .pollAnalogHats = true,
-        .pollImu = false,
-        .pollTouchpad = false,
-        .pollOrientation = false,
-        .analogHatThreshold = 2
+DualSenseControllerOptions controllerOptions{
+        onStateEvent,
+        onValueChangeEvent,
+        40,
+        true,
+        true,
+        true,
+        false,
+        false,
+        false,
+        2
 };
+
 
 #if DUALSENSE_CONTROLLER_VARIANT == DUALSENSE_CONTROLLER_VARIANT_BLUETOOTH
 
 #include <DualSenseControllerBt.h>
 
-DualSenseControllerBt controller(options);
+DualSenseControllerBt controller(&controllerOptions);
 
 #else
 
