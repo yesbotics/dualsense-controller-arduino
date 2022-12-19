@@ -10,7 +10,7 @@
 
 void onStateEvent(DualSenseControllerStateEvent event);
 
-void onValueEvent(DualSenseControllerValueId id, int16_t value);
+void onValueChangeEvent(DualSenseControllerValueId id, int16_t value);
 
 void printValueIfDebugPrint(String s, int16_t value);
 
@@ -36,14 +36,14 @@ const bool DEBUG_PRINT = true;
 
 DualSenseControllerOptions options = {
         .stateEventCallback = onStateEvent,
-        .valueEventCallback = onValueEvent,
+        .valueChangeEventCallback = onValueChangeEvent,
         .pollingInterval = 30,
-        .checkDigitalButtons = true,
-        .checkAnalogButtons = true,
-        .checkAnalogHats = true,
-        .checkImu = false,
-        .checkTouchpad = false,
-        .checkOrientation = false,
+        .pollDigitalButtons = true,
+        .pollAnalogButtons = true,
+        .pollAnalogHats = true,
+        .pollImu = false,
+        .pollTouchpad = false,
+        .pollOrientation = false,
         .analogHatThreshold = 2
 };
 
@@ -51,7 +51,7 @@ DualSenseControllerOptions options = {
 
 #include <DualSenseControllerBt.h>
 
-DualSenseControllerBt controller(&options);
+DualSenseControllerBt controller(options);
 
 #else
 
@@ -100,7 +100,7 @@ void onStateEvent(DualSenseControllerStateEvent event) {
     }
 }
 
-void onValueEvent(DualSenseControllerValueId id, int16_t value) {
+void onValueChangeEvent(DualSenseControllerValueId id, int16_t value) {
     if (DEBUG_PRINT) Serial.println(F("onValueEvent(): "));
     switch (id) {
 
