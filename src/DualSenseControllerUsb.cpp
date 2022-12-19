@@ -3,12 +3,12 @@
 static USB usb;
 static PS5USB ps5Usb(&usb);
 
-DualSenseControllerUsb::DualSenseControllerUsb(DualSenseControllerOptions options) :
+DualSenseControllerUsb::DualSenseControllerUsb(const DualSenseControllerOptions* optionsPtr) :
         ps5UsbPtr_{&ps5Usb},
         DualSenseControllerCore(
                 &usb,
                 &ps5Usb,
-                &options
+                optionsPtr
         ) {
 }
 

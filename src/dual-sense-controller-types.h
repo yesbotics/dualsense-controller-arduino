@@ -92,6 +92,29 @@ using DualSenseControllerStateEventCallback = void (*)(DualSenseControllerStateE
 using DualSenseControllerValueChangeEventCallback = void (*)(DualSenseControllerValueId id, int16_t value);
 
 struct DualSenseControllerOptions {
+    DualSenseControllerOptions(
+            DualSenseControllerStateEventCallback stateEventCallback = nullptr,
+            DualSenseControllerValueChangeEventCallback valueChangeEventCallback = nullptr,
+            uint16_t pollingInterval = 40,
+            bool pollDigitalButton = true,
+            bool pollAnalogButtons = true,
+            bool pollAnalogHats = true,
+            bool pollImu = false,
+            bool pollTouchpad = false,
+            bool pollOrientation = false,
+            uint8_t analogHatThreshold = 2
+    ) :
+            stateEventCallback{stateEventCallback},
+            valueChangeEventCallback{valueChangeEventCallback},
+            pollingInterval{pollingInterval},
+            pollDigitalButtons{pollDigitalButtons},
+            pollAnalogButtons{pollAnalogButtons},
+            pollAnalogHats{pollAnalogHats},
+            pollImu{pollImu},
+            pollTouchpad{pollTouchpad},
+            pollOrientation{pollOrientation},
+            analogHatThreshold{analogHatThreshold} {};
+
     DualSenseControllerStateEventCallback stateEventCallback;
     DualSenseControllerValueChangeEventCallback valueChangeEventCallback;
     uint16_t pollingInterval; // interval for value change check
@@ -104,4 +127,6 @@ struct DualSenseControllerOptions {
     uint8_t analogHatThreshold;
 };
 
+
 #endif //DUALSENSECONTROLLER_TYPES_H
+

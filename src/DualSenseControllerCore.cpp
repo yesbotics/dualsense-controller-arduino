@@ -5,21 +5,21 @@
 DualSenseControllerCore::DualSenseControllerCore(
         USB* usbPtr,
         PS5Parser* ps5Parser,
-        DualSenseControllerOptions* optionsPtr
+        const DualSenseControllerOptions* optionsPtr
 ) :
         usbPtr_{usbPtr},
-        ps5Parser_{ps5Parser},
-        optionsPtr_{optionsPtr} {
-    if (!this->optionsPtr_->stateEventCallback)this->optionsPtr_->stateEventCallback = nullptr;
-    if (!this->optionsPtr_->valueChangeEventCallback)this->optionsPtr_->valueChangeEventCallback = nullptr;
-    if (!this->optionsPtr_->pollingInterval)this->optionsPtr_->pollingInterval = DEFAULT_POLLING_INTERVAL;
-    if (!this->optionsPtr_->pollDigitalButtons)this->optionsPtr_->pollDigitalButtons = DEFAULT_CHECK_DIGITAL_BUTTONS;
-    if (!this->optionsPtr_->pollAnalogButtons)this->optionsPtr_->pollAnalogButtons = DEFAULT_CHECK_ANALOG_BUTTONS;
-    if (!this->optionsPtr_->pollAnalogHats)this->optionsPtr_->pollAnalogHats = DEFAULT_CHECK_ANALOG_HATS;
-    if (!this->optionsPtr_->pollImu)this->optionsPtr_->pollImu = DEFAULT_CHECK_IMU;
-    if (!this->optionsPtr_->pollTouchpad)this->optionsPtr_->pollTouchpad = DEFAULT_CHECK_TOUCHING;
-    if (!this->optionsPtr_->pollOrientation)this->optionsPtr_->pollOrientation = DEFAULT_CHECK_ORIENTATION;
-    if (!this->optionsPtr_->analogHatThreshold)this->optionsPtr_->analogHatThreshold = DEFAULT_ANALOG_HAT_THRESHOLD;
+        ps5Parser_{ps5Parser} {
+    this->optionsPtr_ = new DualSenseControllerOptions;
+    this->optionsPtr_->stateEventCallback = optionsPtr->stateEventCallback;
+    this->optionsPtr_->valueChangeEventCallback = optionsPtr->valueChangeEventCallback;
+    this->optionsPtr_->pollingInterval = optionsPtr->pollingInterval;
+    this->optionsPtr_->pollDigitalButtons = optionsPtr->pollDigitalButtons;
+    this->optionsPtr_->pollAnalogButtons = optionsPtr->pollAnalogButtons;
+    this->optionsPtr_->pollAnalogHats = optionsPtr->pollAnalogHats;
+    this->optionsPtr_->pollImu = optionsPtr->pollImu;
+    this->optionsPtr_->pollTouchpad = optionsPtr->pollTouchpad;
+    this->optionsPtr_->pollOrientation = optionsPtr->pollOrientation;
+    this->optionsPtr_->analogHatThreshold = optionsPtr->analogHatThreshold;
 }
 
 void DualSenseControllerCore::reset() {

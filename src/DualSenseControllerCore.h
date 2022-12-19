@@ -53,7 +53,7 @@ protected:
     explicit DualSenseControllerCore(
             USB* usbPtr,
             PS5Parser* ps5Parser,
-            DualSenseControllerOptions* optionsPtr
+            const DualSenseControllerOptions* optionsPtr
     );
 
     // virtual ~DualSenseControllerCore(); nicht notwendig,
