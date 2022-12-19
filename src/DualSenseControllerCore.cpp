@@ -22,6 +22,10 @@ DualSenseControllerCore::DualSenseControllerCore(
     this->optionsPtr_->analogHatThreshold = optionsPtr->analogHatThreshold;
 }
 
+DualSenseControllerCore::~DualSenseControllerCore() {
+    delete this->optionsPtr_;
+}
+
 void DualSenseControllerCore::reset() {
     for (int i = 0; i < DIGITAL_BUTTONS_SIZE; i++)
         DIGITAL_BUTTONS[i].value = DEFAULT_DIGITAL_BUTTON_VALUE;

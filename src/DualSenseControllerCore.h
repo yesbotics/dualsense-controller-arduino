@@ -59,7 +59,7 @@ protected:
     // virtual ~DualSenseControllerCore(); nicht notwendig,
     // da die Klasse nicht instanzierbar ist und 'delete (DualSenseControllerCore*) dscc' ist nicht möglich
     // siehe C++ Aufbaukurs Seite 200
-    ~DualSenseControllerCore() = default;
+    ~DualSenseControllerCore();
 
     void triggerStateEvent(DualSenseControllerStateEvent event);
 
