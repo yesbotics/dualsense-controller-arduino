@@ -15,6 +15,7 @@ private:
     PS5Parser* ps5Parser_ = nullptr;
     bool isInitialized_ = false;
     bool wasConnected_ = false;
+    DualSenseControllerState state_ = DualSenseControllerState::UNINITIALIZED;
     unsigned long lastMillis_ = 0;
     uint16_t lastMessageCounter_ = -1;
     DualSenseControllerOptions* optionsPtr_;
@@ -37,6 +38,8 @@ private:
 
     void pollOrientation();
 
+    void triggerStateEvent(DualSenseControllerState state);
+
     template<typename TValue>
     void compare(TValue* valuePtr, TValue& newValue, DualSenseControllerValueId id, uint8_t threshold = 0) {
         if ((*valuePtr) == newValue) return;
@@ -49,7 +52,6 @@ private:
     }
 
 protected:
-
     explicit DualSenseControllerCore(
             USB* usbPtr,
             PS5Parser* ps5Parser,
@@ -61,7 +63,7 @@ protected:
     // siehe C++ Aufbaukurs Seite 200
     ~DualSenseControllerCore();
 
-    void triggerStateEvent(DualSenseControllerStateEvent event);
+    void setState(DualSenseControllerState state);
 
     virtual void onConnectionChange(bool isConnected);
 
@@ -72,6 +74,8 @@ public:
     bool init();
 
     void poll();
+
+    DualSenseControllerState getState();
 
     ///////////////////////////////////////////////////
 

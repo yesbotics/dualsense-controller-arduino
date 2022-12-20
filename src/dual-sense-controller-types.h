@@ -3,11 +3,12 @@
 
 #include <Arduino.h>
 
-enum class DualSenseControllerStateEvent : byte {
-    INITIALIZED = 0,
-    CONNECTED = 1,
-    DISCONNECTED = 2,
-    PAIRING = 3
+enum class DualSenseControllerState : byte {
+    UNINITIALIZED = 0,
+    INITIALIZED = 1,
+    CONNECTED = 2,
+    DISCONNECTED = 3,
+    PAIRING = 4
 };
 
 enum class DualSenseControllerValueId : byte {
@@ -87,7 +88,7 @@ enum class DualSenseControllerLedColor : uint32_t {
     GREY = 0x808080,
 };
 
-using DualSenseControllerStateEventCallback = void (*)(DualSenseControllerStateEvent event);
+using DualSenseControllerStateEventCallback = void (*)(DualSenseControllerState event);
 
 using DualSenseControllerValueChangeEventCallback = void (*)(DualSenseControllerValueId id, int16_t value);
 

@@ -43,7 +43,7 @@ void DualSenseControllerCore::reset() {
 bool DualSenseControllerCore::init() {
     if (this->isInitialized_) return false;
     if (this->usbPtr_->Init() == -1)return false;
-    this->triggerStateEvent(DualSenseControllerStateEvent::INITIALIZED);
+    this->setState(DualSenseControllerState::INITIALIZED);
     this->isInitialized_ = true;
     return true;
 }
@@ -55,10 +55,10 @@ void DualSenseControllerCore::poll() {
     if (isConn != this->wasConnected_) {
         this->wasConnected_ = isConn;
         this->onConnectionChange(isConn);
-        this->triggerStateEvent(
+        this->setState(
                 isConn ?
-                DualSenseControllerStateEvent::CONNECTED :
-                DualSenseControllerStateEvent::DISCONNECTED
+                DualSenseControllerState::CONNECTED :
+                DualSenseControllerState::DISCONNECTED
         );
     }
     if (!isConn)return;
@@ -195,9 +195,9 @@ void DualSenseControllerCore::pollOrientation() {
     }
 }
 
-void DualSenseControllerCore::triggerStateEvent(DualSenseControllerStateEvent event) {
+void DualSenseControllerCore::triggerStateEvent(DualSenseControllerState state) {
     if (this->optionsPtr_->stateEventCallback) {
-        this->optionsPtr_->stateEventCallback(event);
+        this->optionsPtr_->stateEventCallback(state);
     }
 }
 
@@ -340,6 +340,15 @@ void DualSenseControllerCore::setPlayerLedsOff() {
  */
 void DualSenseControllerCore::setPlayerLeds(uint8_t bitMask) {
     this->ps5Parser_->setPlayerLed(bitMask);
+}
+
+void DualSenseControllerCore::setState(DualSenseControllerState state) {
+    this->state_ = state;
+    this->triggerStateEvent(state);
+}
+
+DualSenseControllerState DualSenseControllerCore::getState() {
+    return this->state_;
 }
 
 
