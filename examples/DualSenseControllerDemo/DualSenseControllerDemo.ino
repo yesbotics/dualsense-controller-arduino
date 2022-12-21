@@ -1,7 +1,5 @@
 #include <dual-sense-controller-types.h>
 
-#if defined(PLATFORMIO)
-
 #include <Arduino.h>
 
 void onStateEvent(DualSenseControllerState state);
@@ -9,8 +7,6 @@ void onStateEvent(DualSenseControllerState state);
 void onValueChangeEvent(DualSenseControllerValueId id, int16_t value);
 
 void printValueIfDebugPrint(String s, int16_t value);
-
-#endif
 
 #define DUALSENSE_CONTROLLER_VARIANT_USB 0x00
 #define DUALSENSE_CONTROLLER_VARIANT_BLUETOOTH 0x01
