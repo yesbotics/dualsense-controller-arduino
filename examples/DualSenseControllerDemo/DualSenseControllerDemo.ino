@@ -8,7 +8,7 @@
 
 #include <Arduino.h>
 
-void onStateEvent(DualSenseControllerStateEvent event);
+void onStateEvent(DualSenseControllerState state);
 
 void onValueChangeEvent(DualSenseControllerValueId id, int16_t value);
 
@@ -86,16 +86,16 @@ void loop() {
     controller.poll();
 }
 
-void onStateEvent(DualSenseControllerStateEvent event) {
+void onStateEvent(DualSenseControllerState state) {
     if (DEBUG_PRINT) Serial.println(F("onStateEvent(): "));
-    switch (event) {
-        case DualSenseControllerStateEvent::INITIALIZED:
+    switch (state) {
+        case DualSenseControllerState::INITIALIZED:
             if (DEBUG_PRINT) Serial.println(F("INITIALIZED"));
             break;
-        case DualSenseControllerStateEvent::CONNECTED:
+        case DualSenseControllerState::CONNECTED:
             if (DEBUG_PRINT) Serial.println(F("CONNECTED"));
             break;
-        case DualSenseControllerStateEvent::DISCONNECTED:
+        case DualSenseControllerState::DISCONNECTED:
             if (DEBUG_PRINT) Serial.println(F("DISCONNECTED"));
             break;
     }
